@@ -1,33 +1,40 @@
+
 name: Release Pipeline
 
 on:
   push:
     branches:
       - main
+      - investigation/release-readiness
 
 jobs:
-  deploy-production:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Deploy to Production
-        run: |
-          chmod +x scripts/deploy.sh
-          ./scripts/deploy.sh
-
   validate-release:
     runs-on: ubuntu-latest
-    needs: deploy-production
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Run Tests
         run: |
-          echo "Running validation tests..."
           npm install --prefix app
           npm test --prefix app
-          echo "Validation complete - some tests failed because deployment config has errors"
-          exit 1
+
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: validate-release
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify Release Version
+        run: echo "Preparing OrderFlow v2.3.0"
+
+      - name: Deploy to Production
+        run: |
+          echo "Deployment intentionally disabled for this assignment"

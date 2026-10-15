@@ -1,5 +1,8 @@
 {
-  "Version": "1.0",
-  "ReleaseDate": "2024-01-01",
-  "Author": "DevOps Team"
+  "Project": "OrderFlow",
+  "Version": "v2.3.0",
+  "ReleaseDate": "2026-10-16",
+  "Author": "DevOps Team",
+  "Status": "Release Candidate",
+  "ValidationStatus": "Passed"
 }

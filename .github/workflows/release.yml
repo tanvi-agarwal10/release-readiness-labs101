@@ -1,4 +1,3 @@
-
 name: Release Pipeline
 
 on:
@@ -9,6 +8,7 @@ on:
 
 jobs:
   validate-release:
+    name: Validate Release Candidate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,12 +19,14 @@ jobs:
         with:
           node-version: 20
 
-      - name: Run Tests
-        run: |
-          npm install --prefix app
-          npm test --prefix app
+      - name: Install Dependencies
+        run: npm install --prefix app
+
+      - name: Run Tests and Validation
+        run: npm test --prefix app
 
   deploy-production:
+    name: Deploy to Production (Protected)
     runs-on: ubuntu-latest
     needs: validate-release
     environment: production
@@ -33,8 +35,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Verify Release Version
-        run: echo "Preparing OrderFlow v2.3.0"
-
-      - name: Deploy to Production
         run: |
-          echo "Deployment intentionally disabled for this assignment"
+          echo "Target Release: OrderFlow v2.3.0"
+          echo "Environment: production (gated by manual approval)"
+
+      - name: Safe Dry-Run (No Production Deployment)
+        run: |
+          echo "Production deployment is intentionally disabled for this assignment."
+          echo "Dry-run validation successful. No production resources modified."

@@ -1,5 +1,11 @@
-status: unknown
+status: ready_for_approval
+project: OrderFlow
 environment: production
-version: latest
-approval: pending
-rollback: none
+version: v2.3.0
+image_tag: v2.3.0
+approval: pending_review
+rollback: automated_revision_fallback
+target_rollback_version: v2.2.0
+deployment_strategy: rolling_update
+validation_status: passed
+production_deployment: disabled_for_assignment

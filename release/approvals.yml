@@ -1,3 +1,6 @@
-approvedBy: 
-reviewDate: 
-releaseManager: 
+approvedBy: null  # Awaiting designated production environment reviewer approval
+reviewDate: null
+releaseManager: Release Governance Team
+environment: production
+status: pending_approval
+approvalGate: GitHub Environment Protection Rule

@@ -1,7 +1,7 @@
 {
   "name": "release-readiness-lab",
-  "version": "1.0.0",
-  "description": "A simple Express app",
+  "version": "2.3.0",
+  "description": "OrderFlow Node.js Express Application",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
